@@ -25,9 +25,9 @@ export default function App({ Component, pageProps }: AppProps) {
           <CssBaseline />
 
           <Head>
-            <title>Niepce</title>
+            <title>Router Wizard</title>
 
-            <meta name='description' content='Сервис для обмена изображениями' />
+            <meta name='description' content='Сервис для учёта установок роутера' />
             <meta name='viewport' content='width=device-width, initial-scale=1' />
 
             <link rel='icon' href='/favicon.ico' />

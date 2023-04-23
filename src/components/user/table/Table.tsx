@@ -6,18 +6,20 @@ import { Table } from 'components/ui/table/Table';
 import { Role } from 'types/common/role';
 import { User } from 'types/entities/User';
 
-import sx from './Table.styles';
+import { roleOptions } from 'constants/role';
 
 import DeleteIcon from '@mui/icons-material/Delete';
+import PersonIcon from '@mui/icons-material/Person';
 
-const rowTitleList = ['Имя', 'Email', 'Телефон', 'Действия'];
+const rowTitleList = ['Имя', 'Email', 'Телефон', 'Тип', 'Действия'];
 
-export type UsersTableProps = {
+export type UserTableProps = {
   users: User[];
+  onPerson: (uuid: string) => void;
   onDelete: (uuid: string) => void;
 };
 
-export function UserTable({ users, onDelete }: UsersTableProps) {
+export function UserTable({ users, onPerson, onDelete }: UserTableProps) {
   // const [tabsValue, setTabsValue] = useState<string>(Options.ALL);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -31,15 +33,26 @@ export function UserTable({ users, onDelete }: UsersTableProps) {
     setPage(0);
   };
 
+  const roleLabelByValue = roleOptions.reduce(
+    (acc, { value, label }) => ({ ...acc, [value]: label }),
+    {} as Record<Role, string>,
+  );
+
   const rows = users.map(({ uuid, name, email, phone, role }) => ({
     id: uuid,
     cells: [
       name,
       email,
       phone,
-      <IconButton component='button' onClick={() => onDelete(uuid)}>
-        <DeleteIcon />
-      </IconButton>,
+      roleLabelByValue[role],
+      <>
+        <IconButton component='button' onClick={() => onPerson(uuid)}>
+          <PersonIcon />
+        </IconButton>
+        <IconButton component='button' onClick={() => onDelete(uuid)}>
+          <DeleteIcon />
+        </IconButton>
+      </>,
     ],
   }));
 
@@ -56,7 +69,6 @@ export function UserTable({ users, onDelete }: UsersTableProps) {
       rows={rows}
       rowsPerPage={rowsPerPage}
       page={page}
-      rowsPerPageOptions={[5, 10, 25]}
       onPageChange={changePage}
       onRowsPerPageChange={changeRowsPerPage}
     />

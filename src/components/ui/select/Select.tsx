@@ -4,20 +4,17 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import MUISelect, { SelectChangeEvent } from '@mui/material/Select';
 
+import { Option } from 'types/common/option';
+
 import { Box } from '../box/Box';
 import { Typography } from '../typography/Typography';
 
-export type SelectOption = {
-  value: string | number;
-  label?: string;
-};
-
 type Props = {
-  onChange: (value: string | number) => void;
-  value?: string | number;
+  onChange: (value: Option['value']) => void;
+  value?: Option['value'];
   error?: string;
   isError?: boolean;
-  options: SelectOption[];
+  options: Option[];
   isDisabled?: boolean;
   label?: string;
   sx?: SxProps;
@@ -26,24 +23,20 @@ type Props = {
 };
 
 export function Select({ value, options, error, isError, label, sx, selectSx, isDisabled, size, onChange }: Props) {
-  const isNumberValue = typeof value === 'number';
-
-  const selectValue = (value || options[0].value).toString();
-
   const change = (event: SelectChangeEvent) => {
     const targetValue = event.target.value;
-    onChange(isNumberValue ? +targetValue : targetValue);
+    onChange(targetValue);
   };
 
   return (
     <Box sx={{ minWidth: 120, ...sx }}>
       <FormControl fullWidth>
         <InputLabel id='select-label'>{label}</InputLabel>
+
         <MUISelect
           labelId='select-label'
-          id='select'
           sx={selectSx}
-          value={selectValue}
+          value={value}
           label={label}
           error={isError}
           disabled={isDisabled}
@@ -57,6 +50,7 @@ export function Select({ value, options, error, isError, label, sx, selectSx, is
           ))}
         </MUISelect>
       </FormControl>
+
       {error && (
         <Typography variant='body2' color='error'>
           {error}

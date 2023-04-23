@@ -13,24 +13,7 @@ import { Paper } from '../paper/Paper';
 import { Tabs, TabsProps } from '../tabs/Tabs';
 import { Typography } from '../typography/Typography';
 
-const sx = {
-  head: {
-    borderTop: '1px solid rgba(224,224,224,1)',
-  },
-  cell: {
-    padding: '14px',
-  },
-  headCell: {
-    fontSize: '12px',
-    fontWeight: 600,
-  },
-  bodyCell: {
-    fontSize: '14px',
-  },
-  tabs: {
-    padding: '0 16px',
-  },
-};
+import sx from './Table.styles';
 
 export type Row = {
   id: number | string;
@@ -68,6 +51,7 @@ export function Table<T = string | number>({
   return (
     <Paper>
       {tabs && <Tabs value={tabs.value} options={tabs.options} onChange={tabs.onChange} />}
+
       <MUITableContainer>
         <MUITable sx={{ minWidth: 650 }}>
           <MUITableHead sx={sx.head}>
@@ -79,6 +63,7 @@ export function Table<T = string | number>({
               ))}
             </MUITableRow>
           </MUITableHead>
+
           <MUITableBody>
             {rows.length ? (
               shownRows.map(row => (

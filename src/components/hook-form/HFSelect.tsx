@@ -2,18 +2,20 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { SxProps } from '@mui/material';
 
+import { Option } from 'types/common/option';
+
 import { Box } from '../ui/box/Box';
-import { Select, SelectOption } from '../ui/select/Select';
+import { Select } from '../ui/select/Select';
 
 type Props = {
   name: string;
   placeholder?: string;
-  options: SelectOption[];
-  defaultValue?: SelectOption['value'];
+  options: Option[];
+  defaultValue?: Option['value'];
   type?: string;
   label?: string;
   sx?: SxProps;
-  onChange?: (value: SelectOption['value']) => void;
+  onChange?: (value: Option['value']) => void;
 };
 
 export function HFSelect({ name, defaultValue, sx, ...props }: Props) {

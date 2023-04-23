@@ -1,9 +1,23 @@
+import { defaultAppeals } from 'mocks/appeal';
+
 import { useGetAppealListQuery } from 'store/api/appealApi';
 
 import { MainLayout } from 'layouts/main/Main';
 
-export default function AppealList() {
-  const { data: appeals = [] } = useGetAppealListQuery({});
+import { AppealTable } from 'components/appeal/table/Table';
 
-  return <MainLayout>{appeals.map(({ uuid, client }) => JSON.stringify(client))}</MainLayout>;
+export default function AppealList() {
+  const { data: appeals = defaultAppeals } = useGetAppealListQuery({});
+
+  const changeStatus = () => ({});
+
+  const editAppeal = () => ({});
+
+  const deleteAppeal = () => ({});
+
+  return (
+    <MainLayout>
+      <AppealTable appeals={appeals} onStatus={changeStatus} onEdit={editAppeal} onDelete={deleteAppeal} />
+    </MainLayout>
+  );
 }

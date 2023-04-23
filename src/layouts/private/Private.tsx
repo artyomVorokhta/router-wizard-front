@@ -17,11 +17,11 @@ export function PrivateLayout({ children }: Props): JSX.Element {
   const isAuth = useAppSelector(selectIsAuth);
   if (isLoading) return <Loader width='58px' />; // TODO: show loader
 
-  if (isError || !isAuth) {
-    goToAuth();
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    return <></>;
-  }
+  // if (isError || !isAuth) {
+  //   goToAuth();
+  //   // eslint-disable-next-line react/jsx-no-useless-fragment
+  //   return <></>;
+  // }
 
   return children;
 }

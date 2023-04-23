@@ -21,14 +21,14 @@ declare module '@mui/material/styles' {
 }
 
 export const color = {
-  white: '#F9F7F7',
+  white: '#FCFCFC',
   black: '#1D2023',
   primary: '#1463F3',
   secondary: '#DBE2EF',
-  success: '#F25F5C',
-  warning: '#FFE066',
-  error: '#F25F5C',
-  muted: '#C29F6C',
+  success: '#06D6A0',
+  warning: '#FFD166',
+  error: '#EF476F',
+  muted: '#a6a6a6',
 };
 
 export const defaultTheme = createTheme({
